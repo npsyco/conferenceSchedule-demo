@@ -1,9 +1,18 @@
 package com.pluralsight.conferenceScheduledemo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "sessions")
+//solves serialization
+//ignores property: hibernateLazy and handler
+//create an entity and have relationship, hibernate adds stub methods to
+//handle lazy loading and eager loading of the relational data
+//when serializing a hibernate object, dont serialize this because it will try
+//to load in all relational data with sql and causes problems
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

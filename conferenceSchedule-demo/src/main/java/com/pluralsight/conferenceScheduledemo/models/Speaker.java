@@ -1,5 +1,6 @@
 package com.pluralsight.conferenceScheduledemo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 
 import javax.persistence.*;
@@ -24,6 +25,8 @@ public class Speaker {
     */
     
     @ManyToMany(mappedBy = "speakers")
+    //prevents loops
+    @JsonIgnore
     private List<Session> sessions;
     
     public Speaker(){

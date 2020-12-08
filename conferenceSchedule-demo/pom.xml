@@ -22,8 +22,23 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<!-- Exclude the Tomcat dependency -->
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
+		<!-- sibling of springboot-web or jpa - the container is now Jetty, 
+		not Tomcat (which is default). This allows for standalone execution
+		 and can be deployed ie. to envr with JRE-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jetty</artifactId>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -49,6 +64,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!-- THIS MAKES THE STANDALONE CONTAINER
+				 EXECUTABLE ON UNIX/LINUX-BASED SYSs -->
+			<configuration>
+				<executable>true</executable>
+			</configuration>
 			</plugin>
 		</plugins>
 	</build>

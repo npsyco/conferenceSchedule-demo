@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 //tells the router what the mapping url looks like
 @RequestMapping("/api/v1/sessions")
-public class SessionController {
+public class SessionsController {
     @Autowired
     private SessionRepository sessionRepository;
     
